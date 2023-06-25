@@ -9,7 +9,7 @@ import PostPopup from './PostPopup'
 import ConfirmDelete from './ConfirmDelete'
 import { useNavigate } from 'react-router-dom'
 import { IoMdSend } from 'react-icons/io'
-import Comment from './comment'
+import Comment from './Comment'
 
 const Post = ({post}) => {
   const [isLike, setIsLike] = useState(false);
