@@ -11,14 +11,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { registerSchema } from '../constants/registerSchema'
 import { useDispatch, useSelector } from 'react-redux'
 import { actRegister } from '../redux/features/userSlice'
-import registerImg from "../../public/assets/images/register.jpg"
+import registerImg from "../assets/images/register.jpg"
+import Loading from '../components/Loading'
 const RegisterPage = () => {
     const [selected, setSelected] = useState(locationData[236])
     const [isShow, setIsShow] = useState(false)
     const [file, setFile] = useState("")
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {isRegisterSuccess} = useSelector((state) => state.users)
+    const {isRegisterSuccess, isLoadingCreate} = useSelector((state) => state.users)
     const handleLoginPage = () => {
         navigate("/auth/login")
     }
@@ -59,6 +60,9 @@ const RegisterPage = () => {
 
   return (
     <div className='flex w-[100%] h-full mx-auto items-center'>
+        {
+            isLoadingCreate && <Loading/>
+        }
         <div className='bg-[#FFE7CB] overflow-hidden flex-1 h-[90%] rounded-md px-7 py-10 max-lg:hidden'>
             <TiSocialVimeo size={40}/>
             <h1 className='text-[30px] font-bold mt-[100px] mb-5'>Tham gia với chúng tôi để kết nối với thế giới và tạo ra những điều mới</h1>

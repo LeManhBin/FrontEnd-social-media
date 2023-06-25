@@ -7,13 +7,14 @@ import Post from '../components/Post'
 import Friend from '../components/Friend'
 import { actGetPosts } from '../redux/features/postSlice'
 import { actGetAllFriends } from '../redux/features/userSlice'
+import Loading from '../components/Loading'
 
 const HomePage = () => {
-  const {user, friends} = useSelector((state) => state.users)
-  const fullName = `${user?.firstName} ${user.lastName}`
+  const {user, friends, isLoadingCreate} = useSelector((state) => state.users)
+  const {posts, isLoadingCreatePost} = useSelector((state) => state.posts)
+  const fullName = `${user?.firstName} ${user?.lastName}`
   let [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
-  const {posts} = useSelector((state) => state.posts)
   function closeModal() {
     setIsOpen(false)
   }
@@ -28,13 +29,20 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(actGetPosts())
-    handleGetFriends()
   },[]);
+
+  useEffect(() => {
+    handleGetFriends()
+  },[user])
 
 
 
   return (
     <div className='flex gap-10 w-full h-full pb-2 pt-5 max-lg:pl-[100px] max-md:pr-[100px] max-sm:px-5'>
+      {
+        isLoadingCreate && isLoadingCreatePost &&
+        <Loading/>
+      }
       {
         <PostPopup isOpen={isOpen} closeModal={closeModal}/>
       }

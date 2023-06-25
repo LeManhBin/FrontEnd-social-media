@@ -24,17 +24,17 @@ function App() {
     if (accessToken) {
       dispatch(actReLogin(accessToken));
     }
-  }, []);
+  }, [accessToken, dispatch]);
 
-  useEffect(() => {
-    dispatch(actGetMyUser (user?._id))
-  },[user])
+  // useEffect(() => {
+  //   dispatch(actGetMyUser (user?._id))
+  // },[user])
 
   useEffect(() => {
     if(isLogged === false) {
       navigate("/auth/login")
     }
-  },[])
+  },[isLogged])
 
   return (
     <Routes>

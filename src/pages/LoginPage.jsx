@@ -7,9 +7,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { actFetchLogin } from '../redux/features/userSlice'
-import loginImg from "../../public/assets/images/login.jpg"
+import loginImg from "../assets/images/login.jpg"
+import Loading from '../components/Loading'
 export const LoginPage = () => {
-    const {isLogged} = useSelector((state) => state.users) 
+    const {isLogged, isLoadingCreate} = useSelector((state) => state.users) 
     const [isShow, setIsShow] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -37,6 +38,10 @@ export const LoginPage = () => {
     },[isLogged, navigate])
   return (
     <div className='flex w-[80%] h-full mx-auto items-center'>
+        {
+            isLoadingCreate &&
+            <Loading/>
+        }
         <div className='flex-1 h-[90%] px-7 py-10 flex flex-col '>
             <div className='flex flex-col max-lg:items-center'>
                 <h1 className='text-[30px] font-bold mb-3'>Chào mừng trở lại</h1>

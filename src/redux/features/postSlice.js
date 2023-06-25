@@ -16,7 +16,7 @@ const initialState = {
   post: {},
   posts: [],
   isLoading: false,
-  isLoadingCreate: false,
+  isLoadingCreatePost: false,
   errors: {},
 };
 
@@ -49,7 +49,7 @@ export const postSlice = createSlice({
   initialState,
   reducers: {
     actUpdateLoadingCreate: (state, action) => {
-      state.isLoadingCreate = action.payload;
+      state.isLoadingCreatePost = action.payload;
     },
   },
   extraReducers: (builder) => {

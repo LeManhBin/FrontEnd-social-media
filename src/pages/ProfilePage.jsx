@@ -4,17 +4,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { actGetPostsByUser } from '../redux/features/postSlice'
 import { useParams } from 'react-router-dom'
 import Post from '../components/Post'
-import { actAddRemoveFriend, actGetMyUser, actGetUserById } from '../redux/features/userSlice'
+import { actAddRemoveFriend, actGetUserById } from '../redux/features/userSlice'
 import { IMG_URL } from '../constants/config'
 import {RiMessage3Fill} from "react-icons/ri"
 import {ImUserPlus} from "react-icons/im"
 import ChangeProfile from '../components/ChangeProfile'
 import ChangeAvatar from '../components/ChangeAvatar'
+import Loading from '../components/Loading'
 const ProfilePage = () => {
   const dispatch = useDispatch()
   const [isMyProfile, setIsMyProfile] = useState(false)
-  const {userById, user} = useSelector((state) => state.users)
-  const {posts} = useSelector((state) => state.posts)
+  const {userById, user, isLoadingCreate} = useSelector((state) => state.users)
+  const {posts, isLoadingCreatePost} = useSelector((state) => state.posts)
   const {userId} = useParams()
   const fullName = `${userById?.firstName} ${userById.lastName}`
   const friendQuantity = userById?.friends?.length
@@ -51,11 +52,11 @@ const ProfilePage = () => {
     handleCheckFriend()
   }
 
-  useEffect(() => {
-    dispatch(actGetMyUser(userId))
-  },[user])
   return (
     <div className='h-max mt-[60px] pb-10'>
+      {
+        isLoadingCreate && isLoadingCreatePost && <Loading/>
+      }
         <div className='h-[60vh] bg-white'>
           <div className='relative max-w-[1300px] h-[70%] mx-auto' style={{backgroundImage: "url('https://images.unsplash.com/photo-1519882189396-71f93cb4714b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fGZsb3dlcnxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60')", backgroundRepeat: 'no-repeat',backgroundSize: '100%'}}>
               <div className='w-full absolute bottom-[-120px] px-5 flex items-center justify-between max-sm:flex-col max-sm:items-center max-sm:gap-5'>

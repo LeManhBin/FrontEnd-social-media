@@ -203,6 +203,7 @@ export const actRegister = (data) => async (dispatch) => {
 //Login
 export const actReLogin = (token) => async (dispatch) => {
   try {
+    dispatch(actUpdateLoadingCreate(true));
     const decodeToken = jwt_decode(token);
     if (decodeToken?.id) {
       const decodeData = await fetchGetUserLogin(decodeToken?.id);

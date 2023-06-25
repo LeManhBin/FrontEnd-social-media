@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { BiCheck } from 'react-icons/bi'
 import { locationData } from '../constants/location'
 import { useDispatch, useSelector } from 'react-redux'
-import { actGetMyUser, actUpdateProfile } from '../redux/features/userSlice'
+import { actGetMe, actGetMyUser, actUpdateProfile } from '../redux/features/userSlice'
 
 export default function ChangeProfile({user}) {
   let [isOpen, setIsOpen] = useState(false)
@@ -34,7 +34,7 @@ export default function ChangeProfile({user}) {
     }
     if(user?._id) {
         dispatch(actUpdateProfile(user?._id,dataUpdate))
-        dispatch(actGetMyUser(user?._id))
+        dispatch(actGetMe(user))
         closeModal()
     }
     closeModal()
