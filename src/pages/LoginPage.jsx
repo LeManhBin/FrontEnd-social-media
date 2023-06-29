@@ -27,7 +27,6 @@ export const LoginPage = () => {
     })
 
     const onSubmit = (data) => {
-        console.log(data);
         dispatch(actFetchLogin(data))
     }
 
@@ -35,7 +34,7 @@ export const LoginPage = () => {
         if(isLogged) {
             navigate("/")
         }
-    },[isLogged, navigate])
+    },[isLogged])
   return (
     <div className='flex w-[80%] h-full mx-auto items-center'>
         {

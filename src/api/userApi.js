@@ -56,7 +56,7 @@ export const fetchGetUserLogin = async (id) => {
     if (error.response.status === 400) {
       toast.warning(error.response.data.message);
     } else {
-      toast.error("Có lỗi xảy ra vui lòng thử lại");
+      toast.error("error");
     }
   }
 };

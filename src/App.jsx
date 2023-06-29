@@ -19,16 +19,12 @@ function App() {
   const navigate = useNavigate()
   const accessToken = localStorage.getItem(KEY_ACCESS_TOKEN) || null;
   const {isLogged, user} = useSelector((state) => state.users)
-
+  console.log(user);
   useEffect(() => {
     if (accessToken) {
       dispatch(actReLogin(accessToken));
     }
   }, [accessToken, dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(actGetMyUser (user?._id))
-  // },[user])
 
   useEffect(() => {
     if(isLogged === false) {
